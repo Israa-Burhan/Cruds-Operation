@@ -5,25 +5,24 @@
 body {
 	font-family: system-ui;
 }
-/* تغيير حجم شريط التمرير */
+
 ::-webkit-scrollbar {
-	width: 10px; /* العرض للسكرول العمودي */
-	height: 10px; /* الارتفاع للسكرول الأفقي */
+	width: 10px;
+	height: 10px;
 }
 
 /* تخصيص الخلفية */
 ::-webkit-scrollbar-track {
-	background: #f1f1f1; /* لون خلفية المسار */
+	background: #f1f1f1;
 	border-radius: 10px;
 }
 
 /* تخصيص مقبض السكرول */
 ::-webkit-scrollbar-thumb {
-	background: #f8328a; /* لون المقبض */
+	background: #f8328a;
 	border-radius: 10px;
 }
 
-/* عند تمرير الماوس فوق المقبض */
 ::-webkit-scrollbar-thumb:hover {
 	background: #f8328a;
 }
@@ -63,7 +62,7 @@ body {
 }
 .myInput,
 .myPrice {
-	border: 2px solid #d0d0d0; /* لون البوردر الافتراضي */
+	border: 2px solid #d0d0d0;
 	outline: none;
 	transition: border-color 0.3s ease-in-out;
 	height: 30px;
@@ -77,25 +76,25 @@ body {
 	}
 }
 .myInput.changed {
-	border-color: #f8328a; /* اللون عند الكتابة */
+	border-color: #f8328a;
 }
 .price {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 5px; /* مسافة بين الحقول */
+	gap: 5px;
 }
 
 .price input {
-	width: 20%; /* العرض الافتراضي في الشاشات الكبيرة */
+	width: 20%;
 }
 @media (max-width: 768px) {
 	.price {
-		flex-direction: column; /* جعل الحقول تظهر بشكل عمودي */
-		align-items: center; /* توسيط العناصر */
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.price input {
-		width: 100%; /* جعل الحقول تأخذ العرض الكامل */
+		width: 100%;
 	}
 }
 h5 {
@@ -156,7 +155,7 @@ h5 {
 	width: 50%;
 	height: 40px;
 	border-radius: 5px;
-	border: 2px solid #d0d0d0; /* لون البوردر الافتراضي */
+	border: 2px solid #d0d0d0;
 	outline: none;
 	transition: border-color 0.3s ease-in-out;
 	margin-right: 20px;
