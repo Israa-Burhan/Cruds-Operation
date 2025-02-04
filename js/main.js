@@ -50,8 +50,14 @@ function checkFormValidity() {
 	if (brand.value.trim() === "") {
 		allFieldsFilled = false;
 	}
-	if (!imageSelected) {
+	// التحقق من اختيار الصورة عند إنشاء منتج جديد فقط
+	if (mode === "create" && !imageSelected) {
 		allFieldsFilled = false;
+	}
+
+	// السماح بالتحديث حتى لو لم يتم اختيار صورة جديدة
+	if (mode === "update") {
+		allFieldsFilled = true; // لأن جميع الحقول محملة مسبقًا
 	}
 	// تمكين أو تعطيل زر الإضافة
 	submitButton.disabled = !allFieldsFilled;
@@ -68,7 +74,7 @@ productImage.addEventListener("change", function (event) {
 form.addEventListener("submit", function (event) {
 	event.preventDefault(); // منع الإرسال الافتراضي للنموذج
 	addProduct(productContainer); // تنفيذ عملية الإضافة
-	reset.form();
+
 	imageSelected = false;
 	checkFormValidity(); // تحديث حالة الزر بعد الإضافة
 });
@@ -279,6 +285,7 @@ function updatepro(index) {
 	mode = "update"; // تغيير الحالة إلى "تحديث"
 	tempIndex = index; // تخزين فهرس المنتج المراد تعديله
 
+	checkFormValidity();
 	// التمرير للأعلى لضمان رؤية النموذج
 	scroll({
 		top: 0,
