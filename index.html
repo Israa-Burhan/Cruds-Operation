@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Cruds Operation</title>
+
+		<link rel="stylesheet" href="css/all.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+	</head>
+	<body>
+		<div class="cruds">
+			<div class="head">
+				<h3>Cruds Operations</h3>
+				<p>product mangments system</p>
+			</div>
+			<!-- <div class="inputs">
+				<label for="productName">Product Name</label>
+				<input
+					class="myInput"
+					type="text"
+					placeholder="Enter Product Name"
+					id="productName" />
+				<span class="error-message"></span>
+				<h5>Product Price</h5>
+				<div class="price">
+					<input
+						onkeyup="getTotal()"
+						class="myPrice"
+						type="number"
+						placeholder="Enter Product Price"
+						min="0"
+						id="productPrice" />
+
+					<input
+						onkeyup="getTotal()"
+						class="myPrice"
+						type="number"
+						placeholder="Enter Taxes"
+						min="0"
+						id="taxes" />
+
+					<input
+						onkeyup="getTotal()"
+						class="myPrice"
+						type="number"
+						placeholder="Enter Ads"
+						min="0"
+						id="ads" />
+
+					<input
+						onkeyup="getTotal()"
+						class="myPrice"
+						type="number"
+						placeholder="Enter discount"
+						min="0"
+						id="discount" />
+
+					<span id="total"> </span>
+				</div>
+
+				<label for="count">count</label>
+				<input
+					class="myInput"
+					type="number"
+					placeholder="Enter count"
+					id="count" />
+				<span class="error-message"></span>
+				<label for="category">category </label>
+				<input
+					class="myInput"
+					type="text"
+					placeholder="Enter category"
+					id="category" />
+				<span class="error-message"></span>
+				<div class="selectImg">
+					<div c>
+						<label for="brand"> Brand : </label>
+						<select id="brand">
+							<option value="Apple">Apple</option>
+							<option value="Samsung">Samsung</option>
+							<option value="Sony">Sony</option>
+							<option value="Xiaomi">Xiaomi</option>
+							<option value="Huawei">Huawei</option>
+						</select>
+					</div>
+					<div>
+						<label for="productImage"> Select Image : </label>
+						<button id="chooseImageButton">Choose Image</button>
+						<input
+							type="file"
+							id="productImage"
+							accept="image/*"
+							style="display: none" />
+						<div id="imagePreviewContainer" style="display: none">
+							<p id="imageName" style="margin-right: 10px"></p>
+							<img id="previewImage" src="" style="max-width: 100px" />
+						</div>
+					</div>
+				</div>
+				<button
+					class="myBtn"
+					type="submit"
+					onclick="addProduct()"
+					id="addProduct">
+					Add Product
+				</button>
+			</div> -->
+
+			<form id="productForm">
+				<div class="inputs">
+					<label for="productName">Product Name</label>
+					<input
+						class="myInput"
+						type="text"
+						placeholder="Enter Product Name"
+						id="productName" />
+					<span class="error-message"></span>
+
+					<h5>Product Price</h5>
+					<div class="price">
+						<input
+							onkeyup="getTotal()"
+							class="myPrice"
+							type="number"
+							placeholder="Enter Product Price"
+							min="0"
+							id="productPrice" />
+
+						<input
+							onkeyup="getTotal()"
+							class="myPrice"
+							type="number"
+							placeholder="Enter Taxes"
+							min="0"
+							id="taxes" />
+
+						<input
+							onkeyup="getTotal()"
+							class="myPrice"
+							type="number"
+							placeholder="Enter Ads"
+							min="0"
+							id="ads" />
+
+						<input
+							onkeyup="getTotal()"
+							class="myPrice"
+							type="number"
+							placeholder="Enter discount"
+							min="0"
+							id="discount" />
+
+						<span id="total"></span>
+					</div>
+
+					<label for="count">count</label>
+					<input
+						class="myInput"
+						type="number"
+						placeholder="Enter count"
+						id="count" />
+					<span class="error-message"></span>
+
+					<label for="category">category</label>
+					<input
+						class="myInput"
+						type="text"
+						placeholder="Enter category"
+						id="category" />
+					<span class="error-message"></span>
+
+					<div class="selectImg">
+						<div>
+							<label for="brand"> Brand: </label>
+							<select id="brand">
+								<option value="Apple">Apple</option>
+								<option value="Samsung">Samsung</option>
+								<option value="Sony">Sony</option>
+								<option value="Xiaomi">Xiaomi</option>
+								<option value="Huawei">Huawei</option>
+							</select>
+						</div>
+
+						<div>
+							<label for="productImage"> Select Image: </label>
+							<button type="button" id="chooseImageButton">Choose Image</button>
+							<input
+								type="file"
+								id="productImage"
+								accept="image/*"
+								style="display: none" />
+							<div id="imagePreviewContainer" style="display: none">
+								<p id="imageName" style="margin-right: 10px"></p>
+								<img id="previewImage" src="" style="max-width: 100px" />
+							</div>
+						</div>
+					</div>
+
+					<button class="myBtn" type="submit" id="addProduct" disabled>
+						<!-- الزر معطل افتراضيًا -->
+						Add Product
+					</button>
+				</div>
+			</form>
+			<div class="details">
+				<div class="search">
+					<input
+						type="text"
+						class="myInput"
+						id="Search By Name"
+						onkeyup="searchProduct(this.value)"
+						placeholder="search" />
+				</div>
+				<div style="display: flex; align-items: center">
+					<div id="deleteall"></div>
+					<div>
+						<p>Total Products : <span id="totalProducts">0</span></p>
+					</div>
+				</div>
+			</div>
+			<div class="output">
+				<div id="confirmBox" class="confirm-box">
+					<p>Are you sure you want to delete this product?</p>
+					<button id="confirmYes">Yes</button>
+					<button id="confirmNo">No</button>
+				</div>
+
+				<table class="table-container">
+					<thead>
+						<tr>
+							<th>Order</th>
+							<th>Product Name</th>
+							<th>Product Price</th>
+							<th>Image</th>
+							<th>Taxes</th>
+							<th>Ads</th>
+							<th>Discount</th>
+							<th>Total</th>
+							<th>Category</th>
+							<th>Brand</th>
+							<th>Count</th>
+							<th>Inc Count</th>
+							<th>Dec Count</th>
+							<th>Update</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody id="tbody"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<script src="js/all.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
+
+<!-- <div class="cruds">
+	<div class="head">
+		<h3>Cruds Operations</h3>
+		<p>product mangments system</p>
+	</div>
+	<div class="inputs">
+		<label for="productName">Product Name</label>
+		<input
+			class="myInput"
+			type="text"
+			placeholder="Enter Product Name"
+			id="productName" />
+		<span class="error-message"></span>
+		<div class="price">
+			<h5>Product Price</h5>
+
+			<input
+				onkeyup="getTotal()"
+				class="myPrice"
+				type="number"
+				placeholder="Enter Product Price"
+				min="0"
+				id="productPrice" />
+
+			<input
+				onkeyup="getTotal()"
+				class="myPrice"
+				type="number"
+				placeholder="Enter Taxes"
+				min="0"
+				id="taxes" />
+
+			<input
+				onkeyup="getTotal()"
+				class="myPrice"
+				type="number"
+				placeholder="Enter Ads"
+				min="0"
+				id="ads" />
+
+			<input
+				onkeyup="getTotal()"
+				class="myPrice"
+				type="number"
+				placeholder="Enter discount"
+				min="0"
+				id="discount" />
+
+			<span id="total"> </span>
+		</div>
+
+		<label for="count">count</label>
+		<input
+			class="myInput"
+			type="number"
+			placeholder="Enter count"
+			id="count" />
+		<span class="error-message"></span>
+		<label for="category">category </label>
+		<input
+			class="myInput"
+			type="text"
+			placeholder="Enter category"
+			id="category" />
+		<span class="error-message"></span>
+		<div class="selectImg">
+			<label for="brand"> Brand : </label>
+			<select id="brand">
+				<option value="Apple">Apple</option>
+				<option value="Samsung">Samsung</option>
+				<option value="Sony">Sony</option>
+				<option value="Xiaomi">Xiaomi</option>
+				<option value="Huawei">Huawei</option>
+			</select>
+			<label for="productImage"> Select Image : </label>
+			<input type="file" id="productImage" accept="image/*" />
+			<!-- <img
+				id="previewImage"
+				src=""
+				style="max-width: 100px; display: none" /> -->
+<!-- </div>
+		<button
+			class="myBtn"
+			type="submit"
+			onclick="addProduct()"
+			id="addProduct">
+			Add Product
+		</button>
+	</div>
+	<div class="details">
+		<div class="search">
+			<input
+				type="text"
+				class="myInput"
+				id="Search By Name"
+				onkeyup="searchProduct(this.value)"
+				placeholder="search" />
+		</div>
+		<div style="display: flex; align-items: center">
+			<div id="deleteall"></div>
+			<div>
+				<p>Total Products : <span id="totalProducts">0</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="output">
+		<div id="confirmBox" class="confirm-box">
+			<p>Are you sure you want to delete this product?</p>
+			<button id="confirmYes">Yes</button>
+			<button id="confirmNo">No</button>
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Order</th>
+					<th>Product Name</th>
+					<th>Product Price</th>
+					<th>Image</th>
+					<th>Taxes</th>
+					<th>Ads</th>
+					<th>Discount</th>
+					<th>Total</th>
+					<th>Category</th>
+					<th>Brand</th>
+					<th>Count</th>
+					<th>Inc Count</th>
+					<th>Dec Count</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody id="tbody"></tbody>
+		</table>
+	</div>
+</div> -->

@@ -1,0 +1,359 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: system-ui;
+}
+/* تغيير حجم شريط التمرير */
+::-webkit-scrollbar {
+	width: 10px; /* العرض للسكرول العمودي */
+	height: 10px; /* الارتفاع للسكرول الأفقي */
+}
+
+/* تخصيص الخلفية */
+::-webkit-scrollbar-track {
+	background: #f1f1f1; /* لون خلفية المسار */
+	border-radius: 10px;
+}
+
+/* تخصيص مقبض السكرول */
+::-webkit-scrollbar-thumb {
+	background: #f8328a; /* لون المقبض */
+	border-radius: 10px;
+}
+
+/* عند تمرير الماوس فوق المقبض */
+::-webkit-scrollbar-thumb:hover {
+	background: #f8328a;
+}
+
+.cruds {
+	width: 80%;
+	margin: auto;
+}
+.head {
+	text-align: center;
+	text-transform: uppercase;
+	margin: 10px 0;
+	padding: 10px;
+	background-color: #f8328a;
+	border-radius: 5px;
+	box-shadow: 6px 10px 20px 0px rgba(186, 186, 186, 0.7);
+	color: #fff;
+	h3 {
+		font-size: 30px;
+		font-weight: 700;
+		padding-bottom: 10px;
+	}
+	p {
+		font-size: 16px;
+		font-weight: 400;
+		color: #fff;
+	}
+}
+.inputs {
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	label {
+		color: #223c88;
+		font-weight: 500;
+	}
+}
+.myInput,
+.myPrice {
+	border: 2px solid #d0d0d0; /* لون البوردر الافتراضي */
+	outline: none;
+	transition: border-color 0.3s ease-in-out;
+	height: 30px;
+	margin: 10px 0;
+	border-radius: 5px;
+	padding: 4px;
+	color: #000;
+	transition: border-color 0.3s ease-in-out;
+	&:focus {
+		border: 1px solid #f8328a;
+	}
+}
+.myInput.changed {
+	border-color: #f8328a; /* اللون عند الكتابة */
+}
+.price {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px; /* مسافة بين الحقول */
+}
+
+.price input {
+	width: 20%; /* العرض الافتراضي في الشاشات الكبيرة */
+}
+@media (max-width: 768px) {
+	.price {
+		flex-direction: column; /* جعل الحقول تظهر بشكل عمودي */
+		align-items: center; /* توسيط العناصر */
+	}
+
+	.price input {
+		width: 100%; /* جعل الحقول تأخذ العرض الكامل */
+	}
+}
+h5 {
+	color: #223c88;
+}
+#total {
+	background-color: #d0d0d0;
+	padding: 10px 8px;
+	margin: 10px 0;
+	color: #fff;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+#total::before {
+	content: "Total : ";
+}
+
+.myBtn:not(:disabled),
+#chooseImageButton {
+	margin: 15px 0;
+	margin-right: 10px;
+	width: 135px;
+	border: none;
+	background-color: #f8328a;
+	color: #fff;
+	height: 40px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s ease-in-out;
+	&:hover {
+		background-color: #d9207e;
+	}
+}
+.myBtn:disabled {
+	background-color: #d0d0d0;
+	cursor: not-allowed;
+	margin: 15px 0;
+	margin-right: 10px;
+	width: 135px;
+	border: none;
+
+	height: 40px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s ease-in-out;
+}
+.error-message {
+	color: red;
+	font-size: 14px;
+	visibility: hidden;
+}
+
+#brand {
+	margin: 10px 0;
+	width: 50%;
+	height: 40px;
+	border-radius: 5px;
+	border: 2px solid #d0d0d0; /* لون البوردر الافتراضي */
+	outline: none;
+	transition: border-color 0.3s ease-in-out;
+	margin-right: 20px;
+	&:focus {
+		border: 1px solid #f8328a;
+	}
+}
+.selectImg {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	div {
+		display: flex;
+		align-items: center;
+		width: 40%;
+	}
+	label {
+		margin-right: 10px;
+	}
+}
+@media (max-width: 992px) {
+	.selectImg {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		div {
+			width: 100%;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+	#brand {
+		width: 100%;
+	}
+	#productImage {
+		margin: 10px 0;
+	}
+}
+/* تحسين مظهر الجدول */
+table {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 70px;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 2%;
+	overflow: hidden;
+	-webkit-border-radius: 2%;
+	-moz-border-radius: 2%;
+	-ms-border-radius: 2%;
+	-o-border-radius: 2%;
+	padding: 10px 0;
+	/* min-width: 600px; */
+}
+.table-container {
+	overflow-x: auto;
+	border-collapse: collapse;
+}
+th,
+td {
+	border: none;
+	padding: 10px;
+}
+
+@media (max-width: 1180px) {
+	.table-container {
+		overflow-x: auto;
+		display: block;
+	}
+
+	/* table {
+		width: 100%;
+		min-width: 600px;
+	} */
+}
+
+/* تنسيق رأس الجدول */
+thead {
+	background-color: #f8328a;
+	color: white;
+	font-weight: 500;
+	height: 30px;
+}
+tbody {
+	tr {
+		height: 50px;
+	}
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+	tr:nth-child(odd) {
+		background-color: #ffffff;
+	}
+}
+button {
+	border: none;
+	cursor: pointer;
+}
+.incCount {
+	color: green;
+	font-size: 16px;
+}
+.decCount {
+	color: #d81616;
+	font-size: 16px;
+}
+.deleteBtn {
+	color: #d81616;
+	font-size: 16px;
+}
+.editBtn {
+	color: #25cffa;
+	font-size: 16px;
+}
+.order {
+	color: #223c88;
+	font-weight: 700;
+}
+.confirm-box {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border-radius: 5px;
+	z-index: 1000;
+}
+
+.confirm-box button {
+	margin: 10px;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#confirmYes {
+	background: #d9534f;
+	color: white;
+}
+
+#confirmNo {
+	background: #5bc0de;
+	color: white;
+}
+#deleteall {
+	margin: 0 15px;
+	button {
+		margin: 15px 0;
+		width: 135px;
+		border: none;
+		background-color: #f8328a;
+		color: #fff;
+		height: 40px;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: background-color 0.3s ease-in-out;
+		&:hover {
+			background-color: #d9207e;
+		}
+	}
+}
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	p {
+		color: #223c88;
+		font-weight: 700;
+		font-size: 16px;
+	}
+}
+.search {
+	width: 50%;
+	input {
+		width: 50%;
+	}
+}
+@media (max-width: 992px) {
+	.details {
+		flex-direction: column;
+	}
+	.search {
+		width: 100%;
+		input {
+			width: 100%;
+		}
+	}
+}
+.head {
+	h3 {
+		font-size: 20px;
+	}
+}
