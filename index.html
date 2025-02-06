@@ -18,99 +18,6 @@
 				<h3>Cruds Operations</h3>
 				<p>product mangments system</p>
 			</div>
-			<!-- <div class="inputs">
-				<label for="productName">Product Name</label>
-				<input
-					class="myInput"
-					type="text"
-					placeholder="Enter Product Name"
-					id="productName" />
-				<span class="error-message"></span>
-				<h5>Product Price</h5>
-				<div class="price">
-					<input
-						onkeyup="getTotal()"
-						class="myPrice"
-						type="number"
-						placeholder="Enter Product Price"
-						min="0"
-						id="productPrice" />
-
-					<input
-						onkeyup="getTotal()"
-						class="myPrice"
-						type="number"
-						placeholder="Enter Taxes"
-						min="0"
-						id="taxes" />
-
-					<input
-						onkeyup="getTotal()"
-						class="myPrice"
-						type="number"
-						placeholder="Enter Ads"
-						min="0"
-						id="ads" />
-
-					<input
-						onkeyup="getTotal()"
-						class="myPrice"
-						type="number"
-						placeholder="Enter discount"
-						min="0"
-						id="discount" />
-
-					<span id="total"> </span>
-				</div>
-
-				<label for="count">count</label>
-				<input
-					class="myInput"
-					type="number"
-					placeholder="Enter count"
-					id="count" />
-				<span class="error-message"></span>
-				<label for="category">category </label>
-				<input
-					class="myInput"
-					type="text"
-					placeholder="Enter category"
-					id="category" />
-				<span class="error-message"></span>
-				<div class="selectImg">
-					<div c>
-						<label for="brand"> Brand : </label>
-						<select id="brand">
-							<option value="Apple">Apple</option>
-							<option value="Samsung">Samsung</option>
-							<option value="Sony">Sony</option>
-							<option value="Xiaomi">Xiaomi</option>
-							<option value="Huawei">Huawei</option>
-						</select>
-					</div>
-					<div>
-						<label for="productImage"> Select Image : </label>
-						<button id="chooseImageButton">Choose Image</button>
-						<input
-							type="file"
-							id="productImage"
-							accept="image/*"
-							style="display: none" />
-						<div id="imagePreviewContainer" style="display: none">
-							<p id="imageName" style="margin-right: 10px"></p>
-							<img id="previewImage" src="" style="max-width: 100px" />
-						</div>
-					</div>
-				</div>
-				<button
-					class="myBtn"
-					type="submit"
-					onclick="addProduct()"
-					id="addProduct">
-					Add Product
-				</button>
-			</div> -->
-
 			<form id="productForm">
 				<div class="inputs">
 					<label for="productName">Product Name</label>
@@ -191,7 +98,7 @@
 							<button type="button" id="chooseImageButton">Choose Image</button>
 							<input
 								type="file"
-								id="productImage"
+								id="imgInput"
 								accept="image/*"
 								style="display: none" />
 							<div id="imagePreviewContainer" style="display: none">
@@ -202,7 +109,6 @@
 					</div>
 
 					<button class="myBtn" type="submit" id="addProduct" disabled>
-						<!-- الزر معطل افتراضيًا -->
 						Add Product
 					</button>
 				</div>
@@ -229,14 +135,13 @@
 					<button id="confirmYes">Yes</button>
 					<button id="confirmNo">No</button>
 				</div>
-
 				<table class="table-container">
 					<thead>
 						<tr>
 							<th>Order</th>
 							<th>Product Name</th>
-							<th>Product Price</th>
 							<th>Image</th>
+							<th>Product Price</th>
 							<th>Taxes</th>
 							<th>Ads</th>
 							<th>Discount</th>

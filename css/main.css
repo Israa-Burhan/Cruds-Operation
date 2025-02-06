@@ -6,31 +6,30 @@ body {
 	font-family: system-ui;
 }
 
+/* start  scroll bar properties */
 ::-webkit-scrollbar {
 	width: 10px;
 	height: 10px;
 }
-
-/* تخصيص الخلفية */
 ::-webkit-scrollbar-track {
 	background: #f1f1f1;
 	border-radius: 10px;
 }
-
-/* تخصيص مقبض السكرول */
 ::-webkit-scrollbar-thumb {
 	background: #f8328a;
 	border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
 	background: #f8328a;
 }
-
+/* end scroll bar */
+/* start crud contanier */
 .cruds {
 	width: 80%;
 	margin: auto;
 }
+/* end crud contanier */
+/* start head */
 .head {
 	text-align: center;
 	text-transform: uppercase;
@@ -51,6 +50,8 @@ body {
 		color: #fff;
 	}
 }
+/* end head */
+/* start form inputs */
 .inputs {
 	margin-top: 50px;
 	display: flex;
@@ -83,7 +84,6 @@ body {
 	flex-wrap: wrap;
 	gap: 5px;
 }
-
 .price input {
 	width: 20%;
 }
@@ -114,7 +114,6 @@ h5 {
 #total::before {
 	content: "Total : ";
 }
-
 .myBtn:not(:disabled),
 #chooseImageButton {
 	margin: 15px 0;
@@ -149,7 +148,6 @@ h5 {
 	font-size: 14px;
 	visibility: hidden;
 }
-
 #brand {
 	margin: 10px 0;
 	width: 50%;
@@ -195,7 +193,8 @@ h5 {
 		margin: 10px 0;
 	}
 }
-/* تحسين مظهر الجدول */
+/* end form inputs */
+/* start table */
 table {
 	width: 100%;
 	margin-top: 20px;
@@ -220,20 +219,12 @@ td {
 	border: none;
 	padding: 10px;
 }
-
 @media (max-width: 1180px) {
 	.table-container {
 		overflow-x: auto;
 		display: block;
 	}
-
-	/* table {
-		width: 100%;
-		min-width: 600px;
-	} */
 }
-
-/* تنسيق رأس الجدول */
 thead {
 	background-color: #f8328a;
 	color: white;
@@ -288,7 +279,6 @@ button {
 	border-radius: 5px;
 	z-index: 1000;
 }
-
 .confirm-box button {
 	margin: 10px;
 	padding: 10px 20px;
@@ -296,16 +286,17 @@ button {
 	cursor: pointer;
 	border-radius: 5px;
 }
-
 #confirmYes {
 	background: #d9534f;
 	color: white;
 }
-
 #confirmNo {
 	background: #5bc0de;
 	color: white;
 }
+
+/* end table */
+/* start details  */
 #deleteall {
 	margin: 0 15px;
 	button {
@@ -350,9 +341,10 @@ button {
 			width: 100%;
 		}
 	}
-}
-.head {
-	h3 {
-		font-size: 20px;
+	.head {
+		h3 {
+			font-size: 20px;
+		}
 	}
 }
+/* end details  */
