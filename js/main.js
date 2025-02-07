@@ -37,19 +37,23 @@ var imageSelected = false;
 // disabled button if form is not valid or image is not selected ✔️
 // clear form inputs ✔️
 
-////////////////////
+//////////////////////////
 
 // add products to array
-
 var productlist = [];
-// form function
+// Submits the form and adds a new product to the list.
 form.addEventListener("submit", function (event) {
-	event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+	event.preventDefault(); // prevent form submission
 	addProduct(productlist);
 	imageSelected = false;
-	checkFormValidity(); // تحديث حالة الزر بعد الإضافة
-	clearInputs();
+	checkFormValidity(); // check form validity
+	clearInputs(); // clear form inputs
 });
+/**
+ * Adds a new product to the list or updates an existing one.
+ * @param {Array} productlist - The array containing all products.
+ * @returns {void} - this function doesn't return anything
+ */
 function addProduct(productlist) {
 	var product = {
 		name: productName.value.trim(),
@@ -68,23 +72,22 @@ function addProduct(productlist) {
 	} else {
 		// تحديث المنتج الحالي
 		productlist[tempIndex] = product;
-		mode = "create"; // إعادة الوضع إلى "إضافة"
+		mode = "create";
 
 		// حذف حالة التحديث من localStorage
 		localStorage.removeItem("editMode");
 		localStorage.removeItem("editIndex");
 
-		submitButton.innerHTML = " Add Product"; // إرجاع زر الإضافة لحالته الأصلية
+		submitButton.innerHTML = " Add Product";
 		submitButton.style.background = "";
 	}
 	localStorage.setItem("products", JSON.stringify(productlist));
-	console.log(productlist);
+
 	displayProducts(productlist);
 	updateTotalProducts();
 }
 
 // add products to local storage
-
 if (localStorage.getItem("products")) {
 	productlist = JSON.parse(localStorage.getItem("products"));
 } else {
@@ -93,8 +96,11 @@ if (localStorage.getItem("products")) {
 displayProducts(productlist);
 updateTotalProducts();
 
-// display (read) products from local storage in table
-
+/**
+ * Displays the list of products in the table.
+ * @param {Array} productlist - The array containing all products.
+ * @returns {void} - this function doesn't return anything
+ */
 function displayProducts(productlist) {
 	var box = "";
 	for (var i = 0; i < productlist.length; i++) {
@@ -112,8 +118,8 @@ function displayProducts(productlist) {
     <td>${productlist[i].total}</td>
     <td>${productlist[i].category}</td>
     <td>${productlist[i].brand}</td>
-  <td>${productlist[i].count}</td>
     <td><button onclick="updatecount(${i},${1})" class="incCount"><i class="fas fa-plus-circle"></i></button></td>
+		<td>${productlist[i].count}</td>
 		<td><button onclick="updatecount(${i},${-1})" class="decCount"><i class="fas fa-minus-circle"></i></button></td>
 		<td><button onclick="updatepro(${i})" class="editBtn"><i class="fa-solid fa-pen-to-square"></i></button></td>
 		<td><button onclick="deletProduct(${i})" class="deleteBtn"><i class="fa-solid fa-trash"></i></button></td>
@@ -132,7 +138,16 @@ function displayProducts(productlist) {
 	}
 }
 
-// calculate total price
+/**
+ * Calculates and updates the total price of a product.
+ * @param {HTMLElement} productPrice - The input field for the product price.
+ * @param {HTMLElement} taxes - The input field for taxes.
+ * @param {HTMLElement} ads - The input field for additional ads cost.
+ * @param {HTMLElement} discount - The input field for the discount amount.
+ * @param {HTMLElement} total - The element displaying the total price.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function getTotal() {
 	if (productPrice.value.trim() != "") {
 		var result =
@@ -146,44 +161,54 @@ function getTotal() {
 }
 
 // add image to product to localStorage and table
-
 chooseImageButton.addEventListener("click", function () {
-	imgInput.click(); // محاكاة الضغط على input[type="file"]
+	imgInput.click();
 });
-
 imgInput.addEventListener("change", function () {
-	var file = this.files[0]; //  الحصول على الملف
+	var file = this.files[0];
 	if (file) {
-		var reader = new FileReader(); // قراءة ملف الصورة
-		reader.readAsDataURL(file); // تحويل الصورة إلى Base64
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
 		reader.onload = function () {
-			imageBase64 = reader.result; // حفظ Base64
-			// console.log("Image Base64: ", imageBase64); // تحقق من Base64
-			document.getElementById("previewImage").src = imageBase64; // عرض الصورة في المعاينة
+			imageBase64 = reader.result;
+
+			document.getElementById("previewImage").src = imageBase64;
 			document.getElementById("imageName").textContent = file.name;
-			document.getElementById("imagePreviewContainer").style.display = "flex"; // إظهار حاوية المعاينة
+			document.getElementById("imagePreviewContainer").style.display = "flex";
 		};
 	}
 });
 
-// delete products from local storage and table
-
+/**
+ * Deletes a product from the product list based on the provided index.
+ * Displays a confirmation box before deletion.
+ *
+ * @param {number} index - The index of the product to delete from the product list.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function deletProduct(index) {
-	confirmBox.style.display = "block"; // إظهار نافذة التأكيد
+	confirmBox.style.display = "block"; // Show the confirmation box
 	confirmYes.onclick = function () {
-		productlist.splice(index, 1);
-		localStorage.setItem("products", JSON.stringify(productlist));
-		displayProducts(productlist);
-		updateTotalProducts();
-		confirmBox.style.display = "none"; // إخفاء النافذة بعد الحذف
+		productlist.splice(index, 1); // Remove the product at the given index
+		localStorage.setItem("products", JSON.stringify(productlist)); // Update the localStorage
+		displayProducts(productlist); // Display updated product list
+		updateTotalProducts(); // Update the total number of products
+		confirmBox.style.display = "none"; // Hide the confirmation box
 	};
 	confirmNo.onclick = function () {
-		confirmBox.style.display = "none"; // إخفاء النافذة بدون حذف
+		confirmBox.style.display = "none"; // Hide the confirmation box if user cancels
 	};
 }
 
-// update products in local storage and table
-
+/**
+ * Updates the product form with the details of the selected product for editing.
+ * Changes the submit button to "Update Product" and stores the current product index for future reference.
+ *
+ * @param {number} index - The index of the product to update from the product list.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function updatepro(index) {
 	productName.value = productlist[index].name;
 	productPrice.value = productlist[index].price;
@@ -197,47 +222,81 @@ function updatepro(index) {
 
 	if (productlist[index].image) {
 		document.getElementById("previewImage").src = productlist[index].image;
-		document.getElementById("imagePreviewContainer").style.display = "flex"; // إظهار المعاينة
-		imageBase64 = productlist[index].image; // حفظ الصورة في متغير الصورة قبل التحديث
+		document.getElementById("imagePreviewContainer").style.display = "flex";
+		imageBase64 = productlist[index].image;
 	}
 
 	// تغيير زر الإضافة إلى "تحديث"
 	submitButton.innerHTML = "Update Product";
-	submitButton.style.background = "#f39c12"; // لون مميز للزر عند التحديث
-	mode = "update"; // تغيير الحالة إلى "تحديث"
-	tempIndex = index; // تخزين فهرس المنتج المراد تعديله
+	submitButton.style.background = "#f39c12";
+	mode = "update";
+	tempIndex = index;
 	checkFormValidity();
 	// حفظ حالة التحديث في localStorage
 	localStorage.setItem("editMode", "update");
 	localStorage.setItem("editIndex", index);
 }
-// هنا نتحقق من الصفحة بعد عمل ريفريش هل هو حالة تحديث ام اضافة منتج ليتم حل مشكلة بعد الريفريش يردع الى الاضافة
+/**
+ * Runs when the window is loaded. Checks if there is a product in update mode saved in localStorage,
+ * and if so, it restores the update state by populating the form with the selected product's details.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 window.onload = function () {
 	if (localStorage.getItem("editMode") === "update") {
-		var index = localStorage.getItem("editIndex");
+		// Check if we are in update mode
+		var index = localStorage.getItem("editIndex"); // Retrieve the saved product index
 		if (index !== null && productlist[index]) {
-			updatepro(index); // استعادة حالة التحديث
+			// Check if index is valid and product exists
+			updatepro(index); // Restore the update state by filling the form with product details
 		}
 	}
 };
 
-// delete all products from local storage and table
-
+/**
+ * Displays a confirmation modal to delete all products from the product list.
+ * If confirmed, it clears the product list from both the localStorage and the array.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function deleteall() {
-	localStorage.removeItem("products");
-	productlist.splice(0);
-	displayProducts(productlist);
-	updateTotalProducts();
+	var modal = document.getElementById("confirmModal");
+	var confirmBtn = document.getElementById("confirmDelete");
+	var cancelBtn = document.getElementById("cancelDelete");
+
+	modal.style.display = "flex";
+
+	confirmBtn.onclick = function () {
+		localStorage.removeItem("products");
+		productlist.splice(0);
+		displayProducts(productlist);
+		updateTotalProducts();
+		modal.style.display = "none";
+	};
+
+	cancelBtn.onclick = function () {
+		modal.style.display = "none";
+	};
 }
 
-// show total number of products
-
+/**
+ * Updates the displayed total number of products in the product list.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function updateTotalProducts() {
 	document.getElementById("totalProducts").textContent = productlist.length;
 }
 
-// increment and decrement count
-
+/**
+ * Updates the count of a product in the product list based on the specified index and change value.
+ * It increments or decrements the product count and updates the display and localStorage.
+ *
+ * @param {number} index - The index of the product in the product list to update.
+ * @param {number} x - The value to change the product count by (positive to increment, negative to decrement).
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function updatecount(index, x) {
 	if (productlist[index].count == 0 && x == -1) {
 		productlist[index].count = 0;
@@ -248,8 +307,13 @@ function updatecount(index, x) {
 	displayProducts(productlist);
 }
 
-// search products by name
-
+/**
+ * Searches for products in the product list based on the search term and displays the matching products.
+ *
+ * @param {string} term - The search term to filter the products by. It is case-insensitive.
+ *
+ * @returns {void} - This function does not return anything, it updates the product display.
+ */
 function searchProduct(term) {
 	var searchProduct = [];
 	for (var i = 0; i < productlist.length; i++) {
@@ -259,25 +323,24 @@ function searchProduct(term) {
 	}
 	displayProducts(searchProduct);
 }
-// reqular expression for validation
-
-function validateProductName(name) {
-	var regex = /^[a-zA-Z\s]{3,}$/; // اسم يحتوي على حروف أو أرقام، ويكون 3 أحرف على الأقل
-	return regex.test(name);
-}
 
 // input change border color on input focus
 inputs.forEach((input) => {
 	input.addEventListener("input", function () {
 		if (input.value.trim() !== "") {
-			input.classList.add("changed"); // عند الكتابة يتغير اللون ويبقى ثابتًا
+			input.classList.add("changed");
 		} else {
-			input.classList.remove("changed"); // إذا كان الحقل فارغًا، يعود إلى اللون الافتراضي
+			input.classList.remove("changed");
 		}
 	});
 });
 
-//clear inputs
+/**
+ * Clears all input fields and resets related elements to their default values.
+ * This includes product details such as name, price, taxes, and image preview.
+ *
+ * @returns {void} - This function does not return anything.
+ */
 function clearInputs() {
 	productName.value = "";
 	productPrice.value = "";
@@ -290,45 +353,42 @@ function clearInputs() {
 	brand.value = "";
 	imageBase64 = "";
 	imgInput.value = "";
-	document.getElementById("imagePreviewContainer").style.display = "none"; // إخفاء المعاينة بعد المسح
+	document.getElementById("imagePreviewContainer").style.display = "none";
 }
 
 // disabled button if form is not valid or image is not selected
-
 submitButton.disabled = true;
-// التحقق من الحقول
+// check form validity on input events
 form.addEventListener("input", function () {
-	checkFormValidity(); // استدعاء التحقق عند أي تغيير في الحقول
+	checkFormValidity();
 });
 brand.addEventListener("change", checkFormValidity);
-// دالة التحقق من الحقول
+
+/**
+ * Checks the validity of the form inputs and enables or disables the submit button based on the input values.
+ * It checks if all required fields are filled based on the current mode (create or update).
+ *
+ * @returns {void} - This function does not return anything, but it modifies the state of the submit button.
+ */
 function checkFormValidity() {
-	let allFieldsFilled = true;
+	const inputs = form.querySelectorAll(".myInput, .myPrice");
+	const hasEmptyInput = Array.from(inputs).some(
+		(input) => input.value.trim() === ""
+	);
 
-	// التحقق من جميع الحقول
-	form.querySelectorAll(".myInput, .myPrice").forEach(function (input) {
-		if (input.value.trim() === "") {
-			allFieldsFilled = false;
-		}
-	});
+	const isBrandEmpty = brand.value.trim() === "";
+	const isCreatingWithoutImage = mode === "create" && !imageSelected;
+	const isUpdating = mode === "update";
 
-	// التحقق من تحديد البراند
-	if (brand.value.trim() === "") {
-		allFieldsFilled = false;
+	if (isUpdating) {
+		// mode == update
+		submitButton.disabled = hasEmptyInput || isBrandEmpty;
+	} else {
+		// mode == create
+		submitButton.disabled =
+			hasEmptyInput || isBrandEmpty || isCreatingWithoutImage;
 	}
-	// التحقق من اختيار الصورة عند إنشاء منتج جديد فقط
-	if (mode === "create" && !imageSelected) {
-		allFieldsFilled = false;
-	}
-
-	// السماح بالتحديث حتى لو لم يتم اختيار صورة جديدة
-	if (mode === "update") {
-		allFieldsFilled = true; // لأن جميع الحقول محملة مسبقًا
-	}
-	// تمكين أو تعطيل زر الإضافة
-	submitButton.disabled = !allFieldsFilled;
 }
-// عند اختيار الصورة، قم بتحديث حالة التحقق
 imgInput.addEventListener("change", function (event) {
 	if (event.target.files.length > 0) {
 		imageSelected = true;
